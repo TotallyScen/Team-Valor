@@ -13,7 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Camera cam;
     private Ray rayMouse;
     public float maximumLenght;
-    private Quaternion rotation;
+    public float outOfBoundsMaxLenght;
     private Vector3 direction;
 
     void Start()
@@ -24,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate() //fixedupdate zodat de collisions goed werken
     {
+        
         if (moveAllow == true)
         {
             move.x = Input.GetAxis("Horizontal");
@@ -35,6 +36,10 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 RotateToMouseDirection(gameObject, hit.point); //gameObject is het object waar dit script op zit
             }
+            else
+            {
+                RotateToMouseDirection(gameObject, rayMouse.GetPoint(outOfBoundsMaxLenght));
+            }
         }
 
     }
@@ -42,9 +47,9 @@ public class PlayerBehaviour : MonoBehaviour
     void RotateToMouseDirection (GameObject obj, Vector3 destination)
     {
         direction = destination - obj.transform.position;
-        rotation = Quaternion.LookRotation(direction);
-        obj.transform.localRotation = Quaternion.Lerp(obj.transform.rotation, rotation, 1);
-
+        direction.y = 0;
+        obj.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        
     }
 
 }
