@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : ScriptableObject
+public class Enemy : MonoBehaviour
 {
-    public string enemyName;
     public float moveSpeed;
     public float health;
     public float damage;
-    public int spawnIndex;
-    public GameObject prefab;
-
+    public GameObject attackFX;
+    public GameObject player;
 
     public virtual void Attack()
     {
