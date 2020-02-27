@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SlimeScript : Enemy
 {
-    public bool isAttacking;
     private Vector3 direction;
+    private GameObject fxClone;
+    public float fxDestroyDelay;
+    public bool isAttacking;
+    public float explotionRadius;
 
     // Start is called before the first frame update
     void Start()
@@ -19,17 +22,21 @@ public class SlimeScript : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (isAttacking == false)
+        if (!isAttacking)
         {
             RotateToPlayer(gameObject, player.transform.position);
             transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }
     }
 
-    private void OnTriggerEnter()
+    void OnTriggerStay(Collider target)
     {
-        
+        if(target.tag == "Player")
+        {
+            Attack();
+        }
     }
+
 
     public void RotateToPlayer(GameObject obj, Vector3 destination)
     {
@@ -40,6 +47,28 @@ public class SlimeScript : Enemy
 
     public override void Attack()
     {
-        base.Attack();
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            fxClone = Instantiate(attackFX, transform.position, transform.rotation);
+            Destroy(fxClone, fxDestroyDelay);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explotionRadius);
+            foreach (Collider hit in colliders)
+            {
+                if(hit.GetComponent<Health>() != null)
+                {
+                    hit.GetComponent<Health>().health -= damage;
+                }
+            }
+
+            StartCoroutine(WaitAfterAttack());
+        }
+       
+    }
+
+    public IEnumerator WaitAfterAttack()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
     }
 }

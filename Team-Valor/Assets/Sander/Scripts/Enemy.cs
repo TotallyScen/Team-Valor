@@ -5,14 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float moveSpeed;
-    public float health;
+    public Component hpScript;
     public float damage;
+    public float attackDelay;
     public GameObject attackFX;
     public GameObject player;
 
     public virtual void Attack()
     {
-
+       
     }
 
     public virtual void Move()

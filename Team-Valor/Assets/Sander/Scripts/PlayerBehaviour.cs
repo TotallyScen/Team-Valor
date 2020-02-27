@@ -6,6 +6,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public float speed;
     private Vector3 move;
+    public Health hpScript;
 
     public bool moveAllow = true;
 
@@ -21,10 +22,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (hpScript.health <= 0)
+        {
+            print("lmao u ded");
+        }
+    }
+
 
     void FixedUpdate() //fixedupdate zodat de collisions goed werken
     {
-        
+
         if (moveAllow == true)
         {
             move.x = Input.GetAxis("Horizontal");
