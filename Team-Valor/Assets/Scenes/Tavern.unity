@@ -7536,6 +7536,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3920bf0e6adc3064a897bb721b41097f, type: 3}
+--- !u!1 &1337737825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1337737827}
+  - component: {fileID: 1337737826}
+  m_Layer: 0
+  m_Name: invisible wall 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1337737826
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337737825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 4.8142443, z: 28.217684}
+  m_Center: {x: 0.00002357196, y: 1.9071221, z: -0.6091356}
+--- !u!4 &1337737827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337737825}
+  m_LocalRotation: {x: -0, y: -0.7071069, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: -11.064276, y: -9.488702, z: -0.31484032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1755651408}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1001 &1345437218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8679,32 +8723,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversation:
-  - 0v
-  - 1v
-  - 2v
-  - 3v
-  - 4v
-  - 5v
-  - 6v
-  - ffffff
+  - Hi there, weary traveler. Do you fancy yourself in a adventure?
+  - Perfect! Finally someone said yes... This strong tavern was once in ruins by
+    the monsters that live in the cave down the road. They stole my most precious
+    belonging called the Gem of Perfection. I'ts something i need back this instant,
+    I hope you can help me with that...
+  - Oh C'mon what else are you upto then... you came here
+  - So as you would guess I need a strong person to get it back for me
+  - Really?! You're not really going to give up this oppertunity right? it has some
+    coin in it for you!
+  - Perfect perfect. Now be on your way and be swift!
+  - Sure......
+  - Perfect! Now be on your way!
+  - Oh C'mon you got to be kidding me... you got a mighty magical staff you look
+    strong enough...
+  - Yes really! I'll even chip in if you do it!
+  - Yes really! I'll even chip in if you do it!
   conversationAnt1:
-  - 0aa
-  - 1aa
-  - 2aa
-  - 3aa
-  - 4aa
-  - 5aa
-  - 6aa
-  - fffffffffff
+  - I'm interested...
+  - Ofcourse!
+  - Ok you're right I'm in...
+  - Well here is that said person!
+  - Some gold you say?
+  - Let's Go!
+  - Ok.. Ok. I get it i'll do it
+  - Sure! Here i go!
+  - Thanks, sure i'll do it
+  - Let's do it then!
+  - Let's do it then!
   conversationAnt2:
-  - 0a
-  - 1a
-  - 2a
-  - 3a
-  - 4a
-  - 5a
-  - 6a
-  - fffff
+  - Not today my friend...
+  - I changed my mind..
+  - my grandma she is.......
+  - I'm not that strong person...
+  - Really!?
+  - Onwards I go!
+  - Ok you got me let's do it then...
+  - Be right back!
+  - Ok, i'll be on my way!
+  - I'm in let's go!
+  - I'm in let's go!
   convoPanel: {fileID: 1419405713}
   conversationText: {fileID: 1617529870}
   conversationAnswer1: {fileID: 91890628}
@@ -8867,17 +8925,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -9491,6 +9549,8 @@ Transform:
   - {fileID: 1596071523}
   - {fileID: 2093282583}
   - {fileID: 1997242409}
+  - {fileID: 1337737827}
+  - {fileID: 1892441618}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
@@ -9927,7 +9987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -115.53996, y: -42.630035}
+  m_AnchoredPosition: {x: 101, y: -91.315}
   m_SizeDelta: {x: 351.4, y: 228.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1879369454
@@ -9943,17 +10003,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 55
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 3
     m_MaxSize: 55
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -9961,7 +10021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: F to interact
 --- !u!222 &1879369455
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10074,6 +10134,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 0.056999993, z: 5.000433}
   m_Center: {x: -2.4742804, y: 0.08286609, z: -2.3504987}
+--- !u!1 &1892441616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1892441618}
+  - component: {fileID: 1892441617}
+  m_Layer: 0
+  m_Name: Invisible wall 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1892441617
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892441616}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.730276, y: 4.7273445, z: 1.3005614}
+  m_Center: {x: -7.1501164, y: 1.8636723, z: -2.7408268}
+--- !u!4 &1892441618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892441616}
+  m_LocalRotation: {x: -0, y: -0.7071069, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: -0.125332, y: -8.948702, z: -1.0855857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1755651408}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &1936984673
 GameObject:
   m_ObjectHideFlags: 0
