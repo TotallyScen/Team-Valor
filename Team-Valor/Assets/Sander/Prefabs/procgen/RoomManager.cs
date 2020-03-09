@@ -5,14 +5,12 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
 
-    /// <summary>
-    /// final/escape room can be spawned on a random door that doesnt have a room
-    /// check of a door has a room with a bool
-    /// </summary>
     public GameObject[] roomPrefabs;
 
     public int maxRoomCount;
     public int currentRoomIndex;
+    public int currNewRoomIndex;
+    public int totalRooms;
 
     public Vector3 offset;
     private float rayLenght = 10;
@@ -22,57 +20,66 @@ public class RoomManager : MonoBehaviour
 
     public List<GameObject> currentRooms = new List<GameObject>();
     public List<GameObject> newRooms = new List<GameObject>();
+    public List<GameObject> emptyDoorWays = new List<GameObject>();
 
+    private bool isGen = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentRooms.Add(GameObject.FindGameObjectWithTag("Start room"));
-        foreach (GameObject door in currentRooms[currentRoomIndex].GetComponent<Room>().doorPoints)
-        {
-            if(!Physics.Raycast(door.transform.position, door.transform.forward, rayLenght))
-            {
-                print("egg");
-
-            }
-        }
+        StartCoroutine(InstRoom());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isGen) // add loading screen
+        {
+            StopCoroutine(InstRoom());
+            StartCoroutine(InstRoom());
+            isGen = true;
+        }
     }
 
-    public IEnumerator InstRoom(Transform doorTR)
+    public IEnumerator InstRoom()
     {
-        if (currentRoomIndex < maxRoomCount)
+        // Bij spawn room:
+        // Check voor elke doorway:
+        // Als raak == deur -> is cur doorway wall, dan kill wall. Is cur doorway door dan kill door.
+        // als raak muur -> is curdoorway wall, doe niks (of kill de andere wall, blijft gesloten), is curdoorway deur -> kill the wall.
+        if (totalRooms <= maxRoomCount)
         {
-            newRooms.Add(Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], doorTR.position, transform.rotation, doorTR));
-            newRooms[currentRoomIndex].transform.localPosition += offset;
-            currentRoomIndex++;
-            yield return new WaitForSeconds(3);
-            
+            foreach (GameObject room in currentRooms)
+            {
+                foreach (GameObject door in currentRooms[currentRoomIndex].GetComponent<Room>().doorRoomSpawners)
+                {
+                    if (!Physics.Raycast(door.transform.position, door.transform.forward, rayLenght))
+                    {
+                       
+                        newRooms.Add(Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], door.transform.position, transform.rotation, door.transform));
+                        newRooms[currNewRoomIndex].transform.localPosition += offset;
+                        currNewRoomIndex++;
+                        totalRooms++;
+                        yield return new WaitForSeconds(0.1f);
+                    }
+                }
+                currentRoomIndex++;
+            }
+            currentRooms.Clear();
+            for (int i = 0; i < newRooms.Count; i++)
+            {
+                GameObject room = newRooms[i];
+                currentRooms.Add(room);
+            }
+            currentRoomIndex = 0;
+            currNewRoomIndex = 0;
+            newRooms.Clear();
+            isGen = false;
         }
 
-
-        /*  public IEnumerator InstRoom(Transform doorTR)
-          {
-              if(currentRoomIndex < maxRoomCount)
-              {
-                  rooms.Add(Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], doorTR.position, transform.rotation, doorTR));
-                  rooms[currentRoomIndex].transform.localPosition += offset;
-                  currentRoomIndex++;
-                  yield return new WaitForSeconds(1);
-
-              }
-              else
-              {
-                  print("Room limit hit!!");
-              } */
     }
 
-   
+
 
 
 

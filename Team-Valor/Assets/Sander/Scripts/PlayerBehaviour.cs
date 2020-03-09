@@ -50,7 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
                 RotateToMouseDirection(gameObject, rayMouse.GetPoint(outOfBoundsMaxLenght));
             }
         }
-
+        
     }
 
     void RotateToMouseDirection (GameObject obj, Vector3 destination)

@@ -318,7 +318,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308183054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c08054cd1235f804fb7ca4f6d68dcb6d, type: 3}
   m_Name: 
@@ -396,12 +396,16 @@ MonoBehaviour:
   - {fileID: 3080038006259346019, guid: 5107cda0f5a24d34e9c86c6bb8c120ae, type: 3}
   - {fileID: 7469683962572046375, guid: fab3cc7727e7894408fa32f994034776, type: 3}
   - {fileID: 5887308206740164581, guid: 3026c584451a2414e8202d3769fc5bae, type: 3}
-  maxRoomCount: 12
+  maxRoomCount: 20
   currentRoomIndex: 0
+  currNewRoomIndex: 0
+  totalRooms: 0
   offset: {x: 0, y: 0, z: 5.5}
   checkSize: {x: 2, y: 2, z: 2}
-  currentRooms: []
+  currentRooms:
+  - {fileID: 1545730589}
   newRooms: []
+  emptyDoorWays: []
 --- !u!4 &463006093
 Transform:
   m_ObjectHideFlags: 0
@@ -502,13 +506,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619072118}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.9, y: 0.66, z: 18}
+  m_LocalRotation: {x: -0, y: 0.3696912, z: -0, w: 0.9291547}
+  m_LocalPosition: {x: 28.4, y: 0.39, z: 2.6}
   m_LocalScale: {x: 6, y: 2, z: 6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 43.393, z: 0}
 --- !u!1 &713466160 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1373543163551147905, guid: 2fe773f040540314f9b8134d9a0b1e37,
@@ -684,13 +688,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488958765}
-  m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: -0.06518142, y: 12.04, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 55.000004, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &1488958769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,6 +709,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 11, z: -7}
   player: {fileID: 713466160}
+--- !u!1 &1545730589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7469683962572046375, guid: fab3cc7727e7894408fa32f994034776,
+    type: 3}
+  m_PrefabInstance: {fileID: 7469683962628643059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1373543163928987313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -854,7 +864,7 @@ PrefabInstance:
     - target: {fileID: 7469683962572046375, guid: fab3cc7727e7894408fa32f994034776,
         type: 3}
       propertyPath: m_TagString
-      value: Start room
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fab3cc7727e7894408fa32f994034776, type: 3}
