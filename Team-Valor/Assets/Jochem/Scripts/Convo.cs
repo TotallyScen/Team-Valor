@@ -72,7 +72,6 @@ public class Convo : MonoBehaviour
             conversationText.text = conversation[index];
             conversationAnswer1.text = conversationAnt1[index];
             conversationAnswer2.text = conversationAnt2[index];
-
         }
     }
 } 

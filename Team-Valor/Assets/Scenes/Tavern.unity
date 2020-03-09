@@ -4704,8 +4704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.067250006, y: 0.056}
   m_AnchorMax: {x: 0.87987506, y: 0.12483334}
-  m_AnchoredPosition: {x: 303, y: -10.617}
-  m_SizeDelta: {x: -506.3, y: 21.233}
+  m_AnchoredPosition: {x: 311.72, y: -11.746}
+  m_SizeDelta: {x: -335, y: 36.518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &906309569
 MonoBehaviour:
@@ -6307,8 +6307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -279, y: -58.07}
-  m_SizeDelta: {x: 195.8, y: 30.001}
+  m_AnchoredPosition: {x: -259, y: -10.8}
+  m_SizeDelta: {x: 239, y: 36.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1176707121
 MonoBehaviour:
@@ -8728,7 +8728,9 @@ MonoBehaviour:
     the monsters that live in the cave down the road. They stole my most precious
     belonging called the Gem of Perfection. I'ts something i need back this instant,
     I hope you can help me with that...
-  - Oh C'mon what else are you upto then... you came here
+  - Oh C'mon what else are you upto then... you came here. The only thing you have
+    to do is kill the monsters that live in the cave down the road and take back
+    my most precious belonging the gem of perfection.
   - So as you would guess I need a strong person to get it back for me
   - Really?! You're not really going to give up this oppertunity right? it has some
     coin in it for you!
@@ -8736,7 +8738,8 @@ MonoBehaviour:
   - Sure......
   - Perfect! Now be on your way!
   - Oh C'mon you got to be kidding me... you got a mighty magical staff you look
-    strong enough...
+    strong enough... The only thing you have to do for me is kill the monsters in
+    the cave down the road and get my lost treasure back the gem of perfection!
   - Yes really! I'll even chip in if you do it!
   - Yes really! I'll even chip in if you do it!
   conversationAnt1:
@@ -8909,8 +8912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8, y: 4.3903}
-  m_SizeDelta: {x: 825.8, y: 94.919}
+  m_AnchoredPosition: {x: 18.5, y: 58.7}
+  m_SizeDelta: {x: 794, y: 102.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617529870
 MonoBehaviour:
