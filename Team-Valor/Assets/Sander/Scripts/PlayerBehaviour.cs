@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float speed;
     private Vector3 move;
     public Health hpScript;
+    public Animator pAnimator;
 
     public bool moveAllow = true;
 
@@ -17,9 +18,11 @@ public class PlayerBehaviour : MonoBehaviour
     public float outOfBoundsMaxLenght;
     private Vector3 direction;
 
+
+
     void Start()
     {
-
+       
     }
 
     void Update()
@@ -28,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             print("lmao u ded");
         }
+
     }
 
 
@@ -39,6 +43,10 @@ public class PlayerBehaviour : MonoBehaviour
             move.x = Input.GetAxis("Horizontal");
             move.z = Input.GetAxis("Vertical");
             transform.position += move * Time.deltaTime * speed;
+            //transform.Translate(move * Time.deltaTime * speed);
+
+            pAnimator.SetFloat("moveForward", move.z);
+            pAnimator.SetFloat("moveSide", move.x);
 
             rayMouse = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(rayMouse.origin, rayMouse.direction, out hit, maximumLenght))
