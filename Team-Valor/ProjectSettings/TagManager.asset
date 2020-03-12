@@ -6,7 +6,8 @@ TagManager:
   tags:
   - test
   - ScriptManager
-  - Start room
+  - WallPiece
+  - Door
   layers:
   - Default
   - TransparentFX
