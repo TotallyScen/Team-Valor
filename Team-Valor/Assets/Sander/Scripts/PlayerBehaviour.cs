@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 move;
     public Health hpScript;
     public Animator pAnimator;
-    private Vector3 animDirection;
+    public Vector3 animDirection;
 
     public bool moveAllow = true;
 
@@ -72,7 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Animating()
     {
-        float h = Input.GetAxis("Horizontal");
+        float h =- Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         animDirection = new Vector3(h, 0, v);
 
