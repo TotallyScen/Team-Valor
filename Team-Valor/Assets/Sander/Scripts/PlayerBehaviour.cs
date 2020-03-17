@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 move;
     public Health hpScript;
     public Animator pAnimator;
+    private Vector3 animDirection;
 
     public bool moveAllow = true;
 
@@ -44,9 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
             move.z = Input.GetAxis("Vertical");
             transform.position += move * Time.deltaTime * speed;
             //transform.Translate(move * Time.deltaTime * speed);
-
-            pAnimator.SetFloat("moveForward", move.z);
-            pAnimator.SetFloat("moveSide", move.x);
+            Animating();
 
             rayMouse = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(rayMouse.origin, rayMouse.direction, out hit, maximumLenght))
@@ -59,6 +58,8 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
         
+
+        
     }
 
     void RotateToMouseDirection (GameObject obj, Vector3 destination)
@@ -67,6 +68,23 @@ public class PlayerBehaviour : MonoBehaviour
         direction.y = 0;
         obj.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         
+    }
+
+    void Animating()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        animDirection = new Vector3(h, 0, v);
+
+        if (animDirection.magnitude > 1.0f)
+        {
+            animDirection = animDirection.normalized;
+        }
+
+        animDirection = transform.TransformDirection(animDirection);
+
+        pAnimator.SetFloat("moveForward", animDirection.z);
+        pAnimator.SetFloat("moveSide", animDirection.x);
     }
 
 }
