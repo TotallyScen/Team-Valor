@@ -18,6 +18,8 @@ public class RoomManager : MonoBehaviour
 
     //Spawn info
     public Vector3 offset;
+    public Vector3 rayDoorOffset;
+    public float rayDoorLenght;
     public float rayLenght;
     private RaycastHit hit;
     private GameObject finalDoorway;
@@ -85,7 +87,7 @@ public class RoomManager : MonoBehaviour
             {
                 foreach (GameObject doorway in totalRoomList[currentRoomIndex].GetComponent<Room>().doorWays)
                 {
-                    if (Physics.Raycast(doorway.transform.position, doorway.transform.forward, out hit, 5))
+                    if (Physics.Raycast(doorway.transform.position - rayDoorOffset, doorway.transform.forward, out hit, rayDoorLenght))
                     {
                         if(hit.transform.tag == "Door" && doorway.tag == "Door")
                         {
@@ -103,7 +105,7 @@ public class RoomManager : MonoBehaviour
                             yield return new WaitForSeconds(0.1f);
                         }
                     }  
-                    if (!Physics.Raycast(doorway.transform.position, doorway.transform.forward, 5)) // add layers if the final prefab blocks the ray
+                    if (!Physics.Raycast(doorway.transform.position - rayDoorOffset, doorway.transform.forward, rayDoorLenght)) // add layers if the final prefab blocks the ray
                     {
                         EmptyD(doorway);
                         yield return new WaitForSeconds(0.1f);
@@ -125,9 +127,9 @@ public class RoomManager : MonoBehaviour
 
     void RoomSpawn(GameObject door)
     {
-        if (!Physics.Raycast(door.transform.position, door.transform.forward, rayLenght))
+        if (!Physics.Raycast(door.transform.position - rayDoorOffset, door.transform.forward, rayLenght))
         {
-            newRooms.Add(Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], door.transform.position, transform.rotation, door.transform));
+            newRooms.Add(Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], door.transform.position, door.transform.rotation, door.transform));
             newRooms[currNewRoomIndex].transform.localPosition += offset;
             currNewRoomIndex++;
             totalRooms++;
@@ -175,7 +177,7 @@ public class RoomManager : MonoBehaviour
 
             foreach (GameObject door in totalRoomList[totalRooms].GetComponent<Room>().doorWays)
             {
-                if (Physics.Raycast(door.transform.position, door.transform.forward, out hit, 5))
+                if (Physics.Raycast(door.transform.position - rayDoorOffset, door.transform.forward, out hit, 5))
                 {
                     totalRoomList[totalRooms].transform.SetParent(totalRoomList[0].transform, true);
                     DoorwayRemover();

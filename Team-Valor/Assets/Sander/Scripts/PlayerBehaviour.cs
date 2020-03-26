@@ -19,11 +19,13 @@ public class PlayerBehaviour : MonoBehaviour
     public float outOfBoundsMaxLenght;
     private Vector3 direction;
 
-
+    // dit is omdat de ray een trigger ignore moet hebben maar dan moet je ook een layer aan geven en dit werkt volgens de unity API site
+    int layerMask = 1 << 8;
 
     void Start()
     {
-       
+        cam = Camera.main;
+      
     }
 
     void Update()
@@ -44,11 +46,10 @@ public class PlayerBehaviour : MonoBehaviour
             move.x = Input.GetAxis("Horizontal");
             move.z = Input.GetAxis("Vertical");
             transform.position += move * Time.deltaTime * speed;
-            //transform.Translate(move * Time.deltaTime * speed);
             Animating();
 
             rayMouse = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(rayMouse.origin, rayMouse.direction, out hit, maximumLenght))
+            if (Physics.Raycast(rayMouse.origin, rayMouse.direction, out hit, maximumLenght, Physics.DefaultRaycastLayers ,QueryTriggerInteraction.Ignore))
             {
                 RotateToMouseDirection(gameObject, hit.point); //gameObject is het object waar dit script op zit
             }
