@@ -9798,7 +9798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b2b53b80b909442aae5c3f5665d7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 2
+  sceneIndex: 3
 --- !u!1 &1180792674
 GameObject:
   m_ObjectHideFlags: 0
@@ -9974,7 +9974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b2b53b80b909442aae5c3f5665d7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 1
+  sceneIndex: 2
 --- !u!4 &1182247397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: b32baeb40b1c466419f2b036f0dcce30,
