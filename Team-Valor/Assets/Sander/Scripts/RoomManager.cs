@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
@@ -27,6 +29,8 @@ public class RoomManager : MonoBehaviour
 
     //Ref info
     public GameObject loadingUI;
+    public GameObject uiPlayer;
+    public Text hpText;
     private GameObject player;
 
     //Lists
@@ -68,8 +72,11 @@ public class RoomManager : MonoBehaviour
         if (isFinished)
         {
             loadingUI.SetActive(false);
+            uiPlayer.SetActive(true);
             player.GetComponent<PlayerBehaviour>().moveAllow = true;
         }
+
+        hpText.text = "HP: " + player.GetComponent<Health>().health;
     }
 
     public IEnumerator InstRoom()
@@ -196,6 +203,9 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }

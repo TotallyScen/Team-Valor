@@ -19,6 +19,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float outOfBoundsMaxLenght;
     private Vector3 direction;
 
+    public GameObject gameOverUi;
+
     // dit is omdat de ray een trigger ignore moet hebben maar dan moet je ook een layer aan geven en dit werkt volgens de unity API site
     int layerMask = 1 << 8;
 
@@ -32,7 +34,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (hpScript.health <= 0)
         {
-            print("lmao u ded");
+            gameOverUi.SetActive(true);
+            Time.timeScale = 0;
         }
 
     }

@@ -28,6 +28,7 @@ public class Room : MonoBehaviour
             foreach (GameObject block in blockers)
             {
                 Destroy(block);
+                
             }
         }
     }
@@ -44,6 +45,7 @@ public class Room : MonoBehaviour
                 if (door.GetComponent<DoorwaySc>().isConnected)
                 {
                     blockers.Add(Instantiate(rM.doorBlock, door.transform));
+                    
                 }
             }
             foreach (GameObject monster in monstersInRoom)
