@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public Vector3 dir;
     public float speed;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<Health>().health -= damage;
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

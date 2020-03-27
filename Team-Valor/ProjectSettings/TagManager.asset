@@ -9,6 +9,7 @@ TagManager:
   - WallPiece
   - Door
   - Enviroment
+  - Enemy
   layers:
   - Default
   - TransparentFX
