@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class TavernDoor : MonoBehaviour
+public class LoadScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int sceneIndex;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
