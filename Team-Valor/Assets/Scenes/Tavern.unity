@@ -3902,6 +3902,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1604943280}
+    - target: {fileID: 379823555422032126, guid: dd17aae152a128042bac0b3f8fe769fb,
+        type: 3}
+      propertyPath: attackDelay
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4629651267304974318, guid: dd17aae152a128042bac0b3f8fe769fb,
         type: 3}
       propertyPath: m_LocalPosition.x
