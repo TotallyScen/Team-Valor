@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public Vector3 dir;
     public float speed;
     public float damage;
+    public float aliveTime;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,13 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.Translate(dir * speed * Time.deltaTime);
+
+        aliveTime -= Time.deltaTime;
+
+        if(aliveTime <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,10 +32,6 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Health>().health -= damage;
-            Destroy(gameObject);
-        }
-        else
-        {
             Destroy(gameObject);
         }
     }

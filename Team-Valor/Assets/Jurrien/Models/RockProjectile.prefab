@@ -4923,6 +4923,7 @@ MonoBehaviour:
   dir: {x: 0, y: 1, z: 0}
   speed: 5
   damage: 5
+  aliveTime: 3
 --- !u!54 &5089348029992309431
 Rigidbody:
   m_ObjectHideFlags: 0
