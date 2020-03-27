@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Overworld.unity
+    guid: c304543ec0765924eb9f0c2f10b676b0
+  - enabled: 1
+    path: Assets/Scenes/Tavern.unity
+    guid: 323b79faab389904ca1cb72946e1346e
+  - enabled: 1
+    path: Assets/Scenes/Caves.unity
+    guid: fa9ad527b7d3925449946f2a328a0933
+  - enabled: 1
+    path: Assets/Scenes/Bonus lvl.unity
+    guid: eaf17ce5980788b4f8e7c7587e9b923b
   m_configObjects: {}
