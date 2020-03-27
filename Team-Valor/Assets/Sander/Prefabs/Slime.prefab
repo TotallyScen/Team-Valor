@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4114351814672867097}
   - component: {fileID: 1545589624866909597}
   m_Layer: 0
-  m_Name: slime
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   hpScript: {fileID: 6516701136538700204}
+  hitSound: {fileID: 0}
   damage: 1
   attackDelay: 2
   attackFX: {fileID: 1234954620993737655, guid: a153fbc94c15f2346be301f5a6eecdde,
