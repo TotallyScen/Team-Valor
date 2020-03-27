@@ -13,6 +13,7 @@ public class SlimeScript : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        
         if (player == null)
         {
             player = GameObject.FindWithTag("Player");
@@ -33,6 +34,7 @@ public class SlimeScript : Enemy
     {
         if(target.tag == "Player")
         {
+            
             Attack();
         }
     }
@@ -49,6 +51,7 @@ public class SlimeScript : Enemy
     {
         if (!isAttacking)
         {
+            hitSound.Play();
             isAttacking = true;
             fxClone = Instantiate(attackFX, transform.position, transform.rotation);
             Destroy(fxClone, fxDestroyDelay);
