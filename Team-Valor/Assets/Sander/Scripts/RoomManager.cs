@@ -15,6 +15,7 @@ public class RoomManager : MonoBehaviour
     public int currentRoomIndex;
     private int currNewRoomIndex;
     private int totalRooms;
+    public int monsterCount;
 
     //Spawn info
     public Vector3 offset;
@@ -39,10 +40,15 @@ public class RoomManager : MonoBehaviour
     private bool hasFinalRoom = false;
     public bool isFinished;
 
+    //sounds
+    public AudioSource roomBlocked;
+    public AudioSource roomUnblocked;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        
         loadingUI.SetActive(true); //dit is zodat ik de ui uit kan hebben staan terwijl ik in de scene werk zonder dat er een probleem komt als ik em niet aanzet
         StartCoroutine(InstRoom());
         player = GameObject.FindGameObjectWithTag("Player");
@@ -101,6 +107,7 @@ public class RoomManager : MonoBehaviour
                         if (hit.transform.tag == "WallPiece" && doorway.tag == "Door")
                         {
                             doorway.GetComponent<DoorwaySc>().isConnected = true;
+                            hit.transform.GetComponent<DoorwaySc>().isConnected = true;
                             DoorwayRemover();
                             yield return new WaitForSeconds(0.1f);
                         }

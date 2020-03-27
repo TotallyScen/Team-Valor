@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 1545589624866909597}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02992a0588bb95459eae98a0199ea59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
 --- !u!114 &4835049982696666769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,12 +96,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   hpScript: {fileID: 6516701136538700204}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 1545589624866909597}
   damage: 1
   attackDelay: 2
   attackFX: {fileID: 1234954620993737655, guid: a153fbc94c15f2346be301f5a6eecdde,
     type: 3}
   player: {fileID: 0}
+  Manager: {fileID: 0}
   fxDestroyDelay: 1.3
   isAttacking: 0
   explotionRadius: 1

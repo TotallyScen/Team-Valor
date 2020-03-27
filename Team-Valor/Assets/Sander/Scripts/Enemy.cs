@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float moveSpeed;
 
-    public Component hpScript;
+    public Health hpScript;
     public AudioSource hitSound;
 
     public float damage;
@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public GameObject attackFX;
 
     public GameObject player;
+    public GameObject Manager;
 
     public virtual void Attack()
     {

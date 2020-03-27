@@ -34,5 +34,9 @@ public class Projectile : MonoBehaviour
             other.gameObject.GetComponent<Health>().health -= damage;
             Destroy(gameObject);
         }
+        else if (other.tag == "Enviroment")
+        {
+            Destroy(gameObject);
+        }
     }
 }
