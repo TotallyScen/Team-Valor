@@ -343,23 +343,20 @@ MonoBehaviour:
     type: 3}
   bossDoor: {fileID: 3150226560397525709, guid: 9163814ccf5bab54cb0747567122ff44,
     type: 3}
-  maxRoomCount: 10
-  currentRoomIndex: 0
+  minimumRoomCount: 10
   monsterCount: 0
-  offset: {x: 0, y: 0, z: 10.5}
+  RoomOffset: {x: 0, y: 0, z: 10.5}
   rayDoorOffset: {x: 0, y: 0.2, z: 0}
   rayDoorLenght: 20
-  rayLenght: 10
+  roomRayLenght: 10
   loadingUI: {fileID: 981736253}
-  uiPlayer: {fileID: 1593189715}
-  hpText: {fileID: 1073740182}
+  playerUI: {fileID: 1593189715}
   currentRooms:
   - {fileID: 1545730589}
   newRooms: []
   emptyDoorWays: []
   totalRoomList:
   - {fileID: 1545730589}
-  isFinished: 0
   roomBlocked: {fileID: 463006096}
   roomUnblocked: {fileID: 463006095}
 --- !u!4 &463006093

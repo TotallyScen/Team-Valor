@@ -4,31 +4,26 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    private RoomManager rM;
-    private GameObject manager;
+    private RoomManager roomManager;
     public List<GameObject> doorWays = new List<GameObject>();
     public GameObject[] doorRoomSpawners;
     public bool spawnDone;
-    public bool audioPlayed;
 
     public List<GameObject> monstersInRoom = new List<GameObject>();
     public List<GameObject> blockers = new List<GameObject>();
 
     private void Start()
     {
-        manager = GameObject.FindGameObjectWithTag("ScriptManager");
-        rM = manager.GetComponent<RoomManager>();
+        roomManager = GameObject.FindGameObjectWithTag("ScriptManager").GetComponent<RoomManager>();
     }
 
     private void Update()
     {
-        if (rM.monsterCount <= 0)
+        if (roomManager.monsterCount <= 0)
         {
-            
             foreach (GameObject block in blockers)
             {
                 Destroy(block);
-                
             }
         }
     }
@@ -37,15 +32,15 @@ public class Room : MonoBehaviour
     {
         if (other.tag == "Player" && !spawnDone)
         {
-            rM.monsterCount = monstersInRoom.Count;
+            roomManager.monsterCount = monstersInRoom.Count;
             spawnDone = true;
-            rM.roomBlocked.Play();
+            roomManager.roomBlocked.Play();
+
             foreach (GameObject door in doorWays)
             {
                 if (door.GetComponent<DoorwaySc>().isConnected)
                 {
-                    blockers.Add(Instantiate(rM.doorBlock, door.transform));
-                    
+                    blockers.Add(Instantiate(roomManager.doorBlock, door.transform));
                 }
             }
             foreach (GameObject monster in monstersInRoom)

@@ -13,24 +13,23 @@ public class RoomManager : MonoBehaviour
     public GameObject bossDoor;
 
     //Counters
-    public int maxRoomCount;
-    public int currentRoomIndex;
+    public int minimumRoomCount = 5;
+    private int currentRoomIndex;
     private int currNewRoomIndex;
     private int totalRooms;
-    public int monsterCount;
+    [HideInInspector] public int monsterCount;
 
     //Spawn info
-    public Vector3 offset;
+    public Vector3 RoomOffset;
     public Vector3 rayDoorOffset;
-    public float rayDoorLenght;
-    public float rayLenght;
+    [SerializeField] float rayDoorLenght = 20f;
+    [SerializeField] float roomRayLenght = 10f;
     private RaycastHit hit;
     private GameObject finalDoorway;
 
     //Ref info
     public GameObject loadingUI;
-    public GameObject uiPlayer;
-    public Text hpText;
+    public GameObject playerUI;
     private GameObject player;
 
     //Lists
@@ -40,111 +39,91 @@ public class RoomManager : MonoBehaviour
     public List<GameObject> totalRoomList = new List<GameObject>();
    
     //Bools
-    private bool isGen = true;
+    private bool isGenerating = true;
     private bool hasFinalRoom = false;
-    public bool isFinished;
 
     //sounds
     public AudioSource roomBlocked;
     public AudioSource roomUnblocked;
 
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        
-        loadingUI.SetActive(true); //dit is zodat ik de ui uit kan hebben staan terwijl ik in de scene werk zonder dat er een probleem komt als ik em niet aanzet
-        StartCoroutine(InstRoom());
+        loadingUI.SetActive(true); 
+        StartCoroutine(GenerateDungeon());
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerBehaviour>().moveAllow = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!isGen) // add loading screen
+        if (!isGenerating)
         {
-            StopCoroutine(InstRoom());
-            StartCoroutine(InstRoom());
-            isGen = true;
+            StopCoroutine(GenerateDungeon());
+            StartCoroutine(GenerateDungeon());
+            isGenerating = true;
         }
-
-        if (isFinished)
-        {
-            loadingUI.SetActive(false);
-            uiPlayer.SetActive(true);
-            player.GetComponent<PlayerBehaviour>().moveAllow = true;
-        }
-
-        hpText.text = "HP: " + player.GetComponent<Health>().health;
     }
 
-    public IEnumerator InstRoom()
+    public IEnumerator GenerateDungeon()
     {
-        if (totalRooms <= maxRoomCount)
+        if (totalRooms <= minimumRoomCount)
         {
             foreach (GameObject room in currentRooms)
             {
                 foreach (GameObject door in room.GetComponent<Room>().doorRoomSpawners) 
                 {
                     RoomSpawn(door);
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
             ListsUpdate();
-            isGen = false;
+            isGenerating = false;
         }
         else
         {
-            if (currentRoomIndex < totalRoomList.Count) //verkomt out of bound error
+            if (currentRoomIndex < totalRoomList.Count)
             {
-                foreach (GameObject doorway in totalRoomList[currentRoomIndex].GetComponent<Room>().doorWays)
-                {
-                    if (Physics.Raycast(doorway.transform.position - rayDoorOffset, doorway.transform.forward, out hit, rayDoorLenght))
-                    {
-                        if(hit.transform.tag == "Door" && doorway.tag == "Door")
-                        {
-                            doorway.GetComponent<DoorwaySc>().isConnected = true;
-                            if (!hit.transform.GetComponent<DoorwaySc>().isConnected)
-                            {
-                                DoorwayRemover();
-                                yield return new WaitForSeconds(0.1f);
-                            }
-                        }
-                        if (hit.transform.tag == "WallPiece" && doorway.tag == "Door")
-                        {
-                            doorway.GetComponent<DoorwaySc>().isConnected = true;
-                            hit.transform.GetComponent<DoorwaySc>().isConnected = true;
-                            DoorwayRemover();
-                            yield return new WaitForSeconds(0.1f);
-                        }
-                    }  
-                    if (!Physics.Raycast(doorway.transform.position - rayDoorOffset, doorway.transform.forward, rayDoorLenght)) // add layers if the final prefab blocks the ray
-                    {
-                        EmptyD(doorway);
-                        yield return new WaitForSeconds(0.1f);
-                    }
-                    
-                }
-                currentRoomIndex++;
-                isGen = false; 
+                StartCoroutine(DoorwayConnector());
             }
             else if (currentRoomIndex == totalRoomList.Count)
             {
                 FinalRoomSpawn();
             }
-            
         }
-
     }
 
+    IEnumerator DoorwayConnector()
+    {
+        foreach (GameObject doorway in totalRoomList[currentRoomIndex].GetComponent<Room>().doorWays)
+        {
+            if (Physics.Raycast(doorway.transform.position - rayDoorOffset, doorway.transform.forward, out hit, rayDoorLenght) && doorway.tag == "Door")
+            {
+                doorway.GetComponent<DoorwaySc>().isConnected = true;
+                if (hit.transform.tag == "Door" && !hit.transform.GetComponent<DoorwaySc>().isConnected || hit.transform.tag == "WallPiece")
+                {
+                    hit.transform.GetComponent<DoorwaySc>().isConnected = true;
+                    hit.transform.gameObject.SetActive(false);
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            else
+            {
+                EmptyDoorway(doorway);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        currentRoomIndex++;
+        isGenerating = false;
+    }
 
     void RoomSpawn(GameObject door)
     {
-        if (!Physics.Raycast(door.transform.position - rayDoorOffset, door.transform.forward, rayLenght))
+        if (!Physics.Raycast(door.transform.position - rayDoorOffset, door.transform.forward, roomRayLenght))
         {
             newRooms.Add(Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], door.transform.position, door.transform.rotation, door.transform));
-            newRooms[currNewRoomIndex].transform.localPosition += offset;
+            newRooms[currNewRoomIndex].transform.localPosition += RoomOffset;
             currNewRoomIndex++;
             totalRooms++;
         }
@@ -163,20 +142,14 @@ public class RoomManager : MonoBehaviour
         currNewRoomIndex = 0;
         newRooms.Clear();
     }
-
-    void DoorwayRemover()
-    {
-        hit.transform.gameObject.SetActive(false);
-    }
     
-    void EmptyD(GameObject doorway)
+    void EmptyDoorway(GameObject doorway)
     {
         emptyDoorWays.Add(doorway);
         if (doorway.tag != "WallPiece")
         {
             Instantiate(doorBlock, doorway.transform.position, doorway.transform.rotation, doorway.transform);
         }
-
     }
 
     void FinalRoomSpawn()
@@ -187,20 +160,27 @@ public class RoomManager : MonoBehaviour
             hasFinalRoom = true;
             totalRoomList.Add(Instantiate(finalRoom, finalDoorway.transform.position, finalDoorway.transform.rotation, finalDoorway.transform));
             totalRooms++;
-            totalRoomList[totalRooms].transform.localPosition += offset;
+            totalRoomList[totalRooms].transform.localPosition += RoomOffset;
 
             foreach (GameObject door in totalRoomList[totalRooms].GetComponent<Room>().doorWays)
             {
                 if (Physics.Raycast(door.transform.position - rayDoorOffset, door.transform.forward, out hit, 5))
                 {
                     totalRoomList[totalRooms].transform.SetParent(totalRoomList[0].transform, true);
-                    DoorwayRemover();
+                    hit.transform.gameObject.SetActive(false);
                     Instantiate(bossDoor, door.transform.position, door.transform.rotation, totalRoomList[totalRooms].transform);
                     Destroy(door);
                 }
             }
-            isFinished = true;
+            FinishedLoading();
         }
+    }
+
+    void FinishedLoading()
+    {
+        loadingUI.SetActive(false);
+        playerUI.SetActive(true);
+        player.GetComponent<PlayerBehaviour>().moveAllow = true;
     }
 
     public void Restart()
